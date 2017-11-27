@@ -1,6 +1,7 @@
 /**
  *  	Denon Network Receiver 
  *    	Based on Denon/Marantz receiver by Kristopher Kubicki
+ *      Copied from Bobby Dobrescu updates
  *    	SmartThings driver to connect your Denon Network Receiver to SmartThings
  *		Tested with AVR-S710W (game1 & game2 inputs are not available), AVR 1912
 TESED DENON MODELS
@@ -22,8 +23,8 @@ TESED DENON MODELS
 */
 
 metadata {
-    definition (name: "Denon AVR", namespace: "SB", 
-        author: "Bobby Dobrescu") {
+    definition (name: "Denon AVR", namespace: "CK", 
+        author: "Cory Kossan") {
         capability "Actuator"
         capability "Switch" 
         capability "Polling"
