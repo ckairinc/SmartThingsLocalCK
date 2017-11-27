@@ -7,6 +7,6 @@ The handler is based on a previous release by Kristopher Kubicki
 Original release notes can be found here:  
 https://github.com/KristopherKubicki/device-denon-avr
  
-This handler was copied from SBDOBRESCU - for testing  
+This handler was copied from Bobby Dobrescu - for testing  
 This code and notes can be found at:  
 https://github.com/sbdobrescu/DenonAVR
