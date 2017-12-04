@@ -36,6 +36,9 @@ metadata {
         attribute "cbl", "string"
         attribute "tv", "string"
 		attribute "dvd", "string"
+        attribute "dvr", "string"
+        attribute "netusb", "string"
+        attribute "pandora", "string"
 		attribute "mp", "string"
 		attribute "bt", "string"
 		attribute "game", "string"
@@ -56,6 +59,9 @@ metadata {
         command "inputSelect", ["string"]
         command "inputNext"
 		command "cbl"
+        command "dvr"
+        command "netusb"
+        command "pandora"
 		command "tv"
 		command "bd"
 		command "dvd"
@@ -106,60 +112,72 @@ preferences {
             	attributeState("muted", action:"unmute", nextState: "unmuted")
         	}
         }        
-        standardTile("input1", "device.cbl", width: 2, height: 2, decoration: "flat"){     
-            state "OFF", label: 'Cable', action: "cbl", icon:"st.Electronics.electronics3", backgroundColor: "#FFFFFF", nextState:"ON"
-            state "ON", label: 'Cable', action: "cbl", icon:"st.Electronics.electronics3" , backgroundColor: "#53a7c0", nextState:"OFF"        
-            }
-        standardTile("input2", "device.tv", width: 2, height: 2, decoration: "flat"){
-        	 state "OFF", label: 'TV', action: "tv", icon:"st.Electronics.electronics18", backgroundColor:"#FFFFFF",nextState:"ON" 
-             state "ON", label: 'TV', action: "tv", icon:"st.Electronics.electronics18", backgroundColor: "#53a7c0", nextState:"OFF"             
-            }
-        standardTile("input3", "device.bd", width: 2, height: 2, decoration: "flat"){
-        	state "OFF", label: 'Blu-ray', action: "bd", icon:"st.Electronics.electronics8", backgroundColor: "#FFFFFF",nextState:"ON"  
-            state "ON", label: 'Blu-ray', action: "bd", icon:"st.Electronics.electronics8", backgroundColor: "#53a7c0", nextState:"OFF"              
-        	}
-        standardTile("input4", "device.dvd", width: 2, height: 2, decoration: "flat"){
-        	state "OFF", label: 'Chromcast', action: "dvd", icon:"st.Electronics.electronics14", backgroundColor: "#FFFFFF",nextState:"ON"   
-            state "ON", label: 'Chromcast', action: "dvd", icon:"st.Electronics.electronics14", backgroundColor: "#53a7c0", nextState:"OFF"               
-        	}
-		standardTile("input5", "device.mp", width: 2, height: 2, decoration: "flat"){
-        	state "OFF", label: 'Amazon TV', action: "mp", icon:"st.Electronics.electronics9", backgroundColor: "#FFFFFF",nextState:"ON"   
-            state "ON", label: 'Amazon TV', action: "mp", icon:"st.Electronics.electronics9", backgroundColor: "#53a7c0", nextState:"OFF"              
-			}
-        standardTile("input6", "device.bt", width: 2, height: 2, decoration: "flat"){
-        	state "OFF", label: 'Bluetooth', action: "bt", icon:"st.Entertainment.entertainment2", backgroundColor: "#FFFFFF",nextState:"ON"   
-            state "ON", label: 'Bluetooth', action: "bt", icon:"st.Entertainment.entertainment2", backgroundColor: "#53a7c0", nextState:"OFF"             
-			}
-        standardTile("input7", "device.game", width: 2, height: 2, decoration: "flat"){
-        	state "OFF", label: 'Game', action: "game", icon:"st.Electronics.electronics5", backgroundColor: "#FFFFFF",nextState:"ON"   
-            state "ON", label: 'Game', action: "game", icon:"st.Electronics.electronics5", backgroundColor: "#53a7c0", nextState:"OFF"   
-			}               
-		standardTile("input10", "device.sound", width: 4, height: 2, decoration: "flat"){
-        	state "sMusic", label: '${currentValue}', action:"sMusic", icon:"st.Entertainment.entertainment3", backgroundColor: "#FFFFFF", nextState:"sMovie"
-			state "sMovie", label: '${currentValue}', action:"sMovie", icon:"st.Entertainment.entertainment9", backgroundColor: "#FFFFFF", nextState:"sGame"
-			state "sGame", label: '${currentValue}', action:"sGame", icon:"st.Electronics.electronics6", backgroundColor: "#FFFFFF", nextState:"sPure"
-			state "sPure", label: '${currentValue}', action:"sPure", icon:"st.Entertainment.entertainment15", backgroundColor: "#FFFFFF", nextState:"sMusic"
-            }
-        standardTile("input11", "device.q1", width: 1, height: 1, decoration: "flat"){
-        	state "OFF", label: 'Quick 1', action: "q1",  backgroundColor: "#53a7c0",nextState:"ON"   // icon:"st.Electronics.electronics5",
-            state "ON", label: 'Quick 1', action: "q1", backgroundColor: "#79b821", nextState:"OFF"  //, icon:"st.Electronics.electronics5" 
-			}         
-        standardTile("input12", "device.q2", width: 1, height: 1, decoration: "flat"){
-        	state "OFF", label: 'Quick 2', action: "q2", backgroundColor:"#53a7c0" ,nextState:"ON"   //, icon:"st.Electronics.electronics5"
-            state "ON", label: 'Quick 2', action: "q2", backgroundColor: "#79b821" , nextState:"OFF"   
-			}         
-        standardTile("input13", "device.q3", width: 1, height: 1, decoration: "flat"){
-        	state "OFF", label: 'Quick 3', action: "q3", backgroundColor: "#53a7c0",nextState:"ON"   
-            state "ON", label: 'Quick 3', action: "q3", backgroundColor: "#79b821", nextState:"OFF"   
-			}         
-        standardTile("input14", "device.q4", width: 1, height: 1, decoration: "flat"){
-        	state "OFF", label: 'Quick 4', action: "q4", backgroundColor: "#53a7c0",nextState:"ON"   
-            state "ON", label: 'Quick 4', action: "q4", backgroundColor: "#79b821", nextState:"OFF"   
-			}
-	standardTile("zone2", "device.zone2", width: 1, height: 1, inactiveLabel: false, decoration: "flat") {
-			state "OFF", label:"Zone 2", action:"z2on", backgroundColor:"#53a7c0", nextState:"on"
-			state "ON", label:"Zone 2", action:"z2off", backgroundColor:"#79b821", nextState:"off"
-        	}            
+        standardTile("input1", "device.cbl", width: 2, height: 2, decoration: "flat"){ 
+            state "OFF", label: 'Cable Off', action: "cbl", icon:"st.Electronics.electronics3", backgroundColor: "#FFFFFF", nextState:"ON"
+            state "ON", label: 'Cable', action: "cbl", icon:"st.Electronics.electronics3" , backgroundColor: "#53a7c0", nextState:"ON" 
+        }
+        standardTile("input2", "device.dvr", width: 2, height: 2, decoration: "flat"){
+            state "OFF", label: 'Roku Off', action: "dvr", icon:"st.Electronics.electronics18", backgroundColor:"#FFFFFF",nextState:"ON"
+            state "ON", label: 'Roku', action: "dvr", icon:"st.Electronics.electronics18", backgroundColor: "#53a7c0", nextState:"ON" 
+        }
+        standardTile("input3", "device.pandora", width: 2, height: 2, decoration: "flat"){
+        	state "OFF", label: 'Pandora Off', action: "pandora", icon:"st.Electronics.electronics8", backgroundColor: "#FFFFFF",nextState:"ON"  
+            state "ON", label: 'Pandora', action: "pandora", icon:"st.Electronics.electronics8", backgroundColor: "#53a7c0", nextState:"ON"              
+        } 
+//        standardTile("input3", "device.netusb", width: 2, height: 2, decoration: "flat"){
+//        	state "OFF", label: 'Net/USB Off', action: "netusb", icon:"st.Electronics.electronics8", backgroundColor: "#FFFFFF",nextState:"ON"  
+//            state "ON", label: 'Net/USB On', action: "netusb", icon:"st.Electronics.electronics8", backgroundColor: "#53a7c0", nextState:"OFF"              
+//        	}        
+//        standardTile("input2", "device.tv", width: 2, height: 2, decoration: "flat"){
+//        	 state "OFF", label: 'TV', action: "tv", icon:"st.Electronics.electronics18", backgroundColor:"#FFFFFF",nextState:"ON" 
+//             state "ON", label: 'TV', action: "tv", icon:"st.Electronics.electronics18", backgroundColor: "#53a7c0", nextState:"OFF"             
+//            }
+//        standardTile("input3", "device.bd", width: 2, height: 2, decoration: "flat"){
+//        	state "OFF", label: 'Blu-ray', action: "bd", icon:"st.Electronics.electronics8", backgroundColor: "#FFFFFF",nextState:"ON"  
+//            state "ON", label: 'Blu-ray', action: "bd", icon:"st.Electronics.electronics8", backgroundColor: "#53a7c0", nextState:"OFF"              
+//        	}
+//        standardTile("input4", "device.dvd", width: 2, height: 2, decoration: "flat"){
+//        	state "OFF", label: 'Chromcast', action: "dvd", icon:"st.Electronics.electronics14", backgroundColor: "#FFFFFF",nextState:"ON"   
+//            state "ON", label: 'Chromcast', action: "dvd", icon:"st.Electronics.electronics14", backgroundColor: "#53a7c0", nextState:"OFF"               
+//        	}
+//		standardTile("input5", "device.mp", width: 2, height: 2, decoration: "flat"){
+//        	state "OFF", label: 'Amazon TV', action: "mp", icon:"st.Electronics.electronics9", backgroundColor: "#FFFFFF",nextState:"ON"   
+//            state "ON", label: 'Amazon TV', action: "mp", icon:"st.Electronics.electronics9", backgroundColor: "#53a7c0", nextState:"OFF"              
+//			}
+//        standardTile("input6", "device.bt", width: 2, height: 2, decoration: "flat"){
+//        	state "OFF", label: 'Bluetooth', action: "bt", icon:"st.Entertainment.entertainment2", backgroundColor: "#FFFFFF",nextState:"ON"   
+//            state "ON", label: 'Bluetooth', action: "bt", icon:"st.Entertainment.entertainment2", backgroundColor: "#53a7c0", nextState:"OFF"             
+//			}
+//        standardTile("input7", "device.game", width: 2, height: 2, decoration: "flat"){
+//        	state "OFF", label: 'Game', action: "game", icon:"st.Electronics.electronics5", backgroundColor: "#FFFFFF",nextState:"ON"   
+//            state "ON", label: 'Game', action: "game", icon:"st.Electronics.electronics5", backgroundColor: "#53a7c0", nextState:"OFF"   
+//			}               
+//		standardTile("input10", "device.sound", width: 4, height: 2, decoration: "flat"){
+//        	state "sMusic", label: '${currentValue}', action:"sMusic", icon:"st.Entertainment.entertainment3", backgroundColor: "#FFFFFF", nextState:"sMovie"
+//			state "sMovie", label: '${currentValue}', action:"sMovie", icon:"st.Entertainment.entertainment9", backgroundColor: "#FFFFFF", nextState:"sGame"
+//			state "sGame", label: '${currentValue}', action:"sGame", icon:"st.Electronics.electronics6", backgroundColor: "#FFFFFF", nextState:"sPure"
+//			state "sPure", label: '${currentValue}', action:"sPure", icon:"st.Entertainment.entertainment15", backgroundColor: "#FFFFFF", nextState:"sMusic"
+//            }
+//        standardTile("input11", "device.q1", width: 1, height: 1, decoration: "flat"){
+//        	state "OFF", label: 'Quick 1', action: "q1",  backgroundColor: "#53a7c0",nextState:"ON"   // icon:"st.Electronics.electronics5",
+//            state "ON", label: 'Quick 1', action: "q1", backgroundColor: "#79b821", nextState:"OFF"  //, icon:"st.Electronics.electronics5" 
+//			}         
+//        standardTile("input12", "device.q2", width: 1, height: 1, decoration: "flat"){
+//        	state "OFF", label: 'Quick 2', action: "q2", backgroundColor:"#53a7c0" ,nextState:"ON"   //, icon:"st.Electronics.electronics5"
+//            state "ON", label: 'Quick 2', action: "q2", backgroundColor: "#79b821" , nextState:"OFF"   
+//			}         
+//        standardTile("input13", "device.q3", width: 1, height: 1, decoration: "flat"){
+//        	state "OFF", label: 'Quick 3', action: "q3", backgroundColor: "#53a7c0",nextState:"ON"   
+//            state "ON", label: 'Quick 3', action: "q3", backgroundColor: "#79b821", nextState:"OFF"   
+//			}         
+//        standardTile("input14", "device.q4", width: 1, height: 1, decoration: "flat"){
+//        	state "OFF", label: 'Quick 4', action: "q4", backgroundColor: "#53a7c0",nextState:"ON"   
+//            state "ON", label: 'Quick 4', action: "q4", backgroundColor: "#79b821", nextState:"OFF"   
+//			}
+//	standardTile("zone2", "device.zone2", width: 1, height: 1, inactiveLabel: false, decoration: "flat") {
+//			state "OFF", label:"Zone 2", action:"z2on", backgroundColor:"#53a7c0", nextState:"on"
+//			state "ON", label:"Zone 2", action:"z2off", backgroundColor:"#79b821", nextState:"off"
+//        	}            
 		standardTile("poll", "device.poll", width: 1, height: 1, decoration: "flat") {
             state "poll", label: "", action: "polling.poll", icon: "st.secondary.refresh", backgroundColor: "#FFFFFF"
         }
@@ -172,7 +190,9 @@ def parse(String description) {
  	def map = stringToMap(description)
     if(!map.body || map.body == "DQo=") { return }
 	def body = new String(map.body.decodeBase64())
+    //log.debug "TheBody ${body}"
 	def statusrsp = new XmlSlurper().parseText(body)
+    //log.debug "Check XML '${statusrsp}'"
 	//POWER STATUS	
     def power = statusrsp.Power.value.text()
 	if(power == "ON") { 
@@ -208,7 +228,7 @@ def parse(String description) {
 	def inputCanonical = statusrsp.InputFuncSelect.value.text()
             sendEvent(name: "input", value: inputCanonical)
 	        log.debug "Current Input is: ${inputCanonical}"
-    
+            syncTiles("${inputCanonical}")
     def inputSurr = statusrsp.selectSurround.value.text()
     		sendEvent(name: "sound", value: inputSurr)
 	        log.debug "Current Surround is: ${inputSurr}"  
@@ -259,6 +279,18 @@ def parse(String description) {
         syncTiles(cmd)
         request("cmd0=PutZone_InputFunction%2F" +cmd)
         }
+    def netusb() {
+        def cmd = "NET/USB"
+        log.debug "Setting input to ${cmd}"
+        syncTiles(cmd)
+        request("cmd0=PutZone_InputFunction%2F" +cmd)
+        }
+    def pandora() {
+        def cmd = "PANDORA"
+        log.debug "Setting input to ${cmd}"
+        syncTiles(cmd)
+        request("cmd0=PutZone_InputFunction%2F" +cmd)
+        }
     def tv() {
         def cmd = "TV"
         log.debug "Setting input to ${cmd}"
@@ -273,6 +305,12 @@ def parse(String description) {
         }
     def dvd() {
         def cmd = "DVD"
+        log.debug "Setting input to ${cmd}"
+        syncTiles(cmd)
+        request("cmd0=PutZone_InputFunction%2F"+cmd)
+        }
+    def dvr() {
+        def cmd = "DVR"
         log.debug "Setting input to ${cmd}"
         syncTiles(cmd)
         request("cmd0=PutZone_InputFunction%2F"+cmd)
@@ -342,7 +380,7 @@ def parse(String description) {
         request("cmd0=PutZone_InputFunction%2F"+cmd)
     }    
     def poll() { 
-        //log.debug "Polling requested"
+        log.debug "Polling requested"
         refresh()
     }
     def syncTiles(cmd){
@@ -353,13 +391,19 @@ def parse(String description) {
         if (cmd == "BD") sendEvent(name: "bd", value: "ON")	 
             else sendEvent(name: "bd", value: "OFF")						
         if (cmd == "DVD") sendEvent(name: "dvd", value: "ON")	 
-            else sendEvent(name: "dvd", value: "OFF")						
+            else sendEvent(name: "dvd", value: "OFF")	
+        if (cmd == "DVR") sendEvent(name: "dvr", value: "ON")	 
+            else sendEvent(name: "dvr", value: "OFF")
         if (cmd == "MPLAY") sendEvent(name: "mp", value: "ON")	 
             else sendEvent(name: "mp", value: "OFF")						
         if (cmd == "BT") sendEvent(name: "bt", value: "ON")	 
             else sendEvent(name: "bt", value: "OFF")						
         if (cmd == "GAME") sendEvent(name: "game", value: "ON")	 
             else sendEvent(name: "game", value: "OFF")
+        if (cmd == "NET/USB") sendEvent(name: "netusb", value: "ON")	 
+            else sendEvent(name: "netusb", value: "OFF") 
+        if (cmd == "PANDORA") sendEvent(name: "pandora", value: "ON")	 
+            else sendEvent(name: "pandora", value: "OFF")
     }
     def syncQTiles(cmd){
         if (cmd == "1") sendEvent(name: "q1", value: "ON")	 
@@ -422,5 +466,5 @@ def parse(String description) {
         return hexport
     }
     def getVersionTxt(){
-        return "2.1"
+        return "2.1.1"
     }
