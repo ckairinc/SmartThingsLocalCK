@@ -14,11 +14,11 @@
  *
  */
 metadata {
-	definition (name: "Centralite Keypad", namespace: "mitchpond", author: "Mitch Pond") {
+	definition (name: "Centralite Keypad", namespace: "CK", author: "Cory Kossan/Mitch Pond") {
 
 		capability "Battery"
 		capability "Configuration"
-        capability "Motion Sensor"
+		capability "Motion Sensor"
 		capability "Sensor"
 		capability "Temperature Measurement"
 		capability "Refresh"
@@ -26,11 +26,11 @@ metadata {
 		capability "Tamper Alert"
 		capability "Tone"
 		capability "button"
-        capability "polling"
-        capability "Contact Sensor"
+		capability "polling"
+		capability "Contact Sensor"
 		
 		attribute "armMode", "String"
-        attribute "lastUpdate", "String"
+		attribute "lastUpdate", "String"
 		
 		command "setDisarmed"
 		command "setArmedAway"
